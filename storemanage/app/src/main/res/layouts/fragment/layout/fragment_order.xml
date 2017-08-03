@@ -1,0 +1,105 @@
+<android.support.constraint.ConstraintLayout
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.huishengyuan.storemanage.Order.OrderFragment">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="订单列表"
+            android:textColor="@color/appwhite"
+            android:textSize="@dimen/navTitle"/>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btn_order_title1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/order_title_btn_select"
+            android:text="已接单"
+            android:textColor="@drawable/order_title_btn_title_select"
+            android:textSize="@dimen/mainText"/>
+
+        <Button
+            android:id="@+id/btn_order_title2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/order_title_btn_select"
+            android:text="未取餐"
+            android:textColor="@drawable/order_title_btn_title_select"
+            android:textSize="@dimen/mainText"/>
+
+        <Button
+            android:id="@+id/btn_order_title3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/order_title_btn_select"
+            android:text="已取餐"
+            android:textColor="@drawable/order_title_btn_title_select"
+            android:textSize="@dimen/mainText"/>
+
+        <Button
+            android:id="@+id/btn_order_title4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/order_title_btn_select"
+            android:text="已完成"
+            android:textColor="@drawable/order_title_btn_title_select"
+            android:textSize="@dimen/mainText"/>
+
+    </LinearLayout>
+
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/order_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/order_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+</android.support.constraint.ConstraintLayout>

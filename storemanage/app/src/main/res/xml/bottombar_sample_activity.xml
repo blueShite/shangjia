@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/tab_order_inactive"
+        id="@+id/Order"
+        title="订单列表"
+        barColorWhenSelected="F6564A"/>
+    <tab
+        icon="@drawable/tab_menu_inactive"
+        id="@+id/FootList"
+        title="菜单"
+        barColorWhenSelected="F6564A"/>
+    <tab
+        icon="@drawable/tab_info_inactive"
+        id="@+id/My"
+        title="我的"
+        barColorWhenSelected="F6564A"/>
+</tabs>
