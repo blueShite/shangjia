@@ -4,6 +4,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:background="#f5f5f5f5"
              tools:context="com.huishengyuan.storemanage.My.MyFragment">
 
 
@@ -11,15 +12,13 @@
         android:id="@+id/toolbar4"
         android:layout_width="0dp"
         android:layout_height="44dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,5 +26,272 @@
             android:text="我的"
             android:textColor="@color/appwhite"
             android:textSize="@dimen/navTitle"/>
-        </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>
+
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/my_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="0dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:src="@drawable/pic_myself"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_linebg_shape"
+                        android:layout_height="0dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:gravity="center"
+                                android:text="今日订单收入(元)"
+                                android:textColor="@color/ColorBlcak"
+                                android:textSize="@dimen/smallText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/text_my_todayPrice"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="0.0"
+                                android:textSize="@dimen/mainText"
+                                android:textColor="@color/ColorBlcak"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_linebg_shape"
+                        android:layout_height="0dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:gravity="center"
+                                android:text="本周订单收入(元)"
+                                android:textColor="@color/ColorBlcak"
+                                android:textSize="@dimen/smallText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/text_my_weekPrice"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="0.0"
+                                android:textSize="@dimen/mainText"
+                                android:textColor="@color/ColorBlcak"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_linebg_shape"
+                        android:layout_height="0dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:gravity="center"
+                                android:text="本月订单收入(元)"
+                                android:textColor="@color/ColorBlcak"
+                                android:textSize="@dimen/smallText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/text_my_monthPrice"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="0.0"
+                                android:textSize="@dimen/mainText"
+                                android:textColor="@color/ColorBlcak"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_linebg_shape"
+                        android:layout_height="0dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:gravity="center"
+                                android:text="今日订单数量(单)"
+                                android:textColor="@color/ColorBlcak"
+                                android:textSize="@dimen/smallText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/text_my_todayNum"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textSize="@dimen/mainText"
+                                android:textColor="@color/ColorBlcak"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_linebg_shape"
+                        android:layout_height="0dp">
+
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:gravity="center"
+                                android:text="本周订单数量(单)"
+                                android:textColor="@color/ColorBlcak"
+                                android:textSize="@dimen/smallText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/text_my_weekNum"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textSize="@dimen/mainText"
+                                android:textColor="@color/ColorBlcak"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_linebg_shape"
+                        android:layout_height="0dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:gravity="center"
+                                android:text="本月订单数量(单)"
+                                android:textColor="@color/ColorBlcak"
+                                android:textSize="@dimen/smallText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/text_my_monthNum"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textSize="@dimen/mainText"
+                                android:textColor="@color/ColorBlcak"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 </android.support.constraint.ConstraintLayout>

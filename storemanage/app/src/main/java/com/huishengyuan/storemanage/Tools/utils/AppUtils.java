@@ -133,4 +133,12 @@ public class AppUtils {
         return width;
     }
 
+    public static String setImageUrl(String imageUrl){
+
+        if(StringUtils.isEmpty(imageUrl)){
+            return "";
+        }
+        return imageUrl;
+    }
+
 }

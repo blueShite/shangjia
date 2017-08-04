@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.huishengyuan.storemanage.Order.Adapter.OrderAdapter;
 import com.huishengyuan.storemanage.R;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
@@ -41,6 +42,7 @@ public class OrderFragment extends SupportFragment {
 
     private View mView;
     private String page;
+    private OrderAdapter mOrderAdapter;
 
     public static OrderFragment newInstance() {
         Bundle args = new Bundle();
@@ -65,6 +67,8 @@ public class OrderFragment extends SupportFragment {
         mBtnOrderTitle1.setSelected(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mOrderRecycle.setLayoutManager(layoutManager);
+        mOrderAdapter = new OrderAdapter();
+        mOrderRecycle.setAdapter(mOrderAdapter);
 
         //定制刷新加载
         SinaRefreshView headerView = new SinaRefreshView(getContext());
