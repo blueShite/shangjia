@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".FootList.FootDetail.FootDetailActivity">
         </activity>
+        <activity android:name=".Order.OrderDetail.OrderDetailActivity">
+        </activity>
     </application>
 
 </manifest>
