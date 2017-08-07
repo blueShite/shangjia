@@ -1,6 +1,7 @@
 package com.huishengyuan.storemanage.Order;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,13 +10,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import com.huishengyuan.storemanage.Manage.Bean.LoginBean;
+import com.huishengyuan.storemanage.Manage.LoginManage;
 import com.huishengyuan.storemanage.Order.Adapter.OrderAdapter;
+import com.huishengyuan.storemanage.Order.Bean.OrderListBean;
+import com.huishengyuan.storemanage.Order.Interface.OrderInterface;
+import com.huishengyuan.storemanage.Order.OrderDetail.OrderDetailActivity;
+import com.huishengyuan.storemanage.Order.Presenter.OrderPresenter;
+import com.huishengyuan.storemanage.Order.ScanBarCode.ScanBarCodeActivity;
 import com.huishengyuan.storemanage.R;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.footer.LoadingView;
 import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +37,7 @@ import me.yokeyword.fragmentation.SupportFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OrderFragment extends SupportFragment {
+public class OrderFragment extends SupportFragment implements OrderInterface {
 
     @BindView(R.id.btn_order_title1)
     Button mBtnOrderTitle1;
@@ -39,10 +51,14 @@ public class OrderFragment extends SupportFragment {
     RecyclerView mOrderRecycle;
     @BindView(R.id.order_refresh)
     TwinklingRefreshLayout mOrderRefresh;
+    @BindView(R.id.image_order_scaner)
+    ImageView mImageOrderScaner;
 
     private View mView;
-    private String page;
     private OrderAdapter mOrderAdapter;
+    private OrderPresenter mPresenter = new OrderPresenter(this);
+    private String orderStatus;
+    private List<OrderListBean> mList = new ArrayList<>();
 
     public static OrderFragment newInstance() {
         Bundle args = new Bundle();
@@ -57,18 +73,33 @@ public class OrderFragment extends SupportFragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_order, container, false);
         ButterKnife.bind(this, mView);
-        page = "1";
         customView();
+        orderStatus = "-1";
         return mView;
     }
 
-    private void customView(){
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        mPresenter.requestList(LoginManage.getInstance().getLoginBean().getRes_id(),orderStatus);
+    }
 
+    private void customView() {
+
+        mPresenter.setContext(getContext());
         mBtnOrderTitle1.setSelected(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mOrderRecycle.setLayoutManager(layoutManager);
-        mOrderAdapter = new OrderAdapter();
+        mOrderAdapter = new OrderAdapter(mList,getContext(),this);
         mOrderRecycle.setAdapter(mOrderAdapter);
+
+        mImageOrderScaner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ScanBarCodeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //定制刷新加载
         SinaRefreshView headerView = new SinaRefreshView(getContext());
@@ -76,20 +107,11 @@ public class OrderFragment extends SupportFragment {
         headerView.setTextColor(0xff745D5C);
         mOrderRefresh.setHeaderView(headerView);
 
-        LoadingView loadingView = new LoadingView(getContext());
-        mOrderRefresh.setBottomView(loadingView);
-        mOrderRefresh.setOnRefreshListener(new RefreshListenerAdapter(){
+        mOrderRefresh.setEnableLoadmore(false);
+        mOrderRefresh.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
-                page = "1";
                 mOrderRefresh.finishRefreshing();
-            }
-
-            @Override
-            public void onLoadMore(final TwinklingRefreshLayout refreshLayout) {
-                int pageIndex = Integer.parseInt(page)+1;
-                page = pageIndex+"";
-                mOrderRefresh.finishLoadmore();
             }
         });
     }
@@ -102,25 +124,52 @@ public class OrderFragment extends SupportFragment {
                 mBtnOrderTitle2.setSelected(false);
                 mBtnOrderTitle3.setSelected(false);
                 mBtnOrderTitle4.setSelected(false);
+                orderStatus = "-1";
+                mPresenter.requestList(LoginManage.getInstance().getLoginBean().getRes_id(),orderStatus);
                 break;
             case R.id.btn_order_title2:
                 mBtnOrderTitle1.setSelected(false);
                 mBtnOrderTitle2.setSelected(true);
                 mBtnOrderTitle3.setSelected(false);
                 mBtnOrderTitle4.setSelected(false);
+                orderStatus = "1";
+                mPresenter.requestList(LoginManage.getInstance().getLoginBean().getRes_id(),orderStatus);
                 break;
             case R.id.btn_order_title3:
                 mBtnOrderTitle1.setSelected(false);
                 mBtnOrderTitle2.setSelected(false);
                 mBtnOrderTitle3.setSelected(true);
                 mBtnOrderTitle4.setSelected(false);
+                orderStatus = "2";
+                mPresenter.requestList(LoginManage.getInstance().getLoginBean().getRes_id(),orderStatus);
                 break;
             case R.id.btn_order_title4:
                 mBtnOrderTitle1.setSelected(false);
                 mBtnOrderTitle2.setSelected(false);
                 mBtnOrderTitle3.setSelected(false);
                 mBtnOrderTitle4.setSelected(true);
+                orderStatus = "3";
+                mPresenter.requestList(LoginManage.getInstance().getLoginBean().getRes_id(),orderStatus);
                 break;
         }
+    }
+
+    @Override
+    public void requestSucess(List<OrderListBean> list) {
+        mList.clear();
+        mList.addAll(list);
+        mOrderAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void requestError() {
+        mList.clear();
+        mOrderAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClickOrderItem(int poist) {
+        Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+        startActivity(intent);
     }
 }

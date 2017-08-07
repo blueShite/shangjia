@@ -19,6 +19,7 @@ import android.content.pm.PackageManager;
 import android.support.v7.app.AlertDialog;
 import android.view.WindowManager;
 
+import com.huishengyuan.storemanage.NetWork.OkGoTools;
 import com.huishengyuan.storemanage.Tools.MyApplication;
 
 import java.math.BigDecimal;
@@ -136,9 +137,9 @@ public class AppUtils {
     public static String setImageUrl(String imageUrl){
 
         if(StringUtils.isEmpty(imageUrl)){
-            return "";
+            return "null";
         }
-        return imageUrl;
+        return OkGoTools.BaseUrl+imageUrl;
     }
 
 }

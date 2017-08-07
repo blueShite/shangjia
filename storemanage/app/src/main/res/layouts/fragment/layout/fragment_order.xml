@@ -25,6 +25,14 @@
             android:text="订单列表"
             android:textColor="@color/appwhite"
             android:textSize="@dimen/navTitle"/>
+
+        <ImageView
+            android:id="@+id/image_order_scaner"
+            android:layout_gravity="right"
+            android:layout_width="40dp"
+            android:scaleType="center"
+            android:src="@drawable/nav_scan"
+            android:layout_height="match_parent"/>
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout

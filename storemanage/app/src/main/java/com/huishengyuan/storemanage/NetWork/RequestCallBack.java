@@ -1,6 +1,7 @@
 package com.huishengyuan.storemanage.NetWork;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.callback.AbsCallback;
@@ -22,8 +23,12 @@ public class RequestCallBack extends AbsCallback<RequestStringBean> {
 
     @Override
     public void onSuccess(Response<RequestStringBean> response) {
-        if(!response.body().isRes()){
-            Toasty.error(mContext,response.body().getMes()).show();
+        if(!response.isSuccessful()){
+            Toasty.error(mContext,"请求失败").show();
+        }else {
+            if(!response.body().isRes()){
+                Toasty.error(mContext,response.body().getMes()).show();
+            }
         }
     }
 

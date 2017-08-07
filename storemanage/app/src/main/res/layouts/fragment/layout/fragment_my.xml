@@ -26,6 +26,15 @@
             android:text="我的"
             android:textColor="@color/appwhite"
             android:textSize="@dimen/navTitle"/>
+
+        <ImageView
+            android:id="@+id/image_my_set"
+            android:layout_gravity="right"
+            android:src="@drawable/nav_set"
+            android:scaleType="center"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"/>
+
     </android.support.v7.widget.Toolbar>
 
     <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout

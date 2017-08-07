@@ -1,6 +1,7 @@
 package com.huishengyuan.storemanage.My;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.huishengyuan.storemanage.My.MySub.MySetActivity;
 import com.huishengyuan.storemanage.R;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
@@ -15,6 +17,7 @@ import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -65,7 +68,7 @@ public class MyFragment extends SupportFragment {
         mMyRefresh.setHeaderView(headerView);
 
         mMyRefresh.setEnableLoadmore(false);
-        mMyRefresh.setOnRefreshListener(new RefreshListenerAdapter(){
+        mMyRefresh.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
 
@@ -74,4 +77,12 @@ public class MyFragment extends SupportFragment {
         });
 
     }
+
+    @OnClick(R.id.image_my_set)
+    public void onViewClicked() {
+        Intent intent = new Intent(getActivity(), MySetActivity.class);
+        startActivity(intent);
+    }
+
+
 }
