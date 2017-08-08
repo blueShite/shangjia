@@ -14,6 +14,9 @@ import android.widget.ImageView;
 
 import com.huishengyuan.storemanage.Manage.Bean.LoginBean;
 import com.huishengyuan.storemanage.Manage.LoginManage;
+import com.huishengyuan.storemanage.NetWork.OkGoTools;
+import com.huishengyuan.storemanage.NetWork.RequestCallBack;
+import com.huishengyuan.storemanage.NetWork.RequestStringBean;
 import com.huishengyuan.storemanage.Order.Adapter.OrderAdapter;
 import com.huishengyuan.storemanage.Order.Bean.OrderListBean;
 import com.huishengyuan.storemanage.Order.Interface.OrderInterface;
@@ -25,13 +28,17 @@ import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.footer.LoadingView;
 import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -111,7 +118,7 @@ public class OrderFragment extends SupportFragment implements OrderInterface {
         mOrderRefresh.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
-                mOrderRefresh.finishRefreshing();
+                mPresenter.requestList(LoginManage.getInstance().getLoginBean().getRes_id(),orderStatus);
             }
         });
     }
@@ -156,6 +163,7 @@ public class OrderFragment extends SupportFragment implements OrderInterface {
 
     @Override
     public void requestSucess(List<OrderListBean> list) {
+        mOrderRefresh.finishRefreshing();
         mList.clear();
         mList.addAll(list);
         mOrderAdapter.notifyDataSetChanged();
@@ -163,6 +171,7 @@ public class OrderFragment extends SupportFragment implements OrderInterface {
 
     @Override
     public void requestError() {
+        mOrderRefresh.finishRefreshing();
         mList.clear();
         mOrderAdapter.notifyDataSetChanged();
     }
@@ -170,6 +179,35 @@ public class OrderFragment extends SupportFragment implements OrderInterface {
     @Override
     public void onClickOrderItem(int poist) {
         Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+        intent.putExtra("orderId",mList.get(poist).getId());
         startActivity(intent);
+    }
+
+    @Override
+    public void onClickSucessBtn(int poist) {
+        requestOrderSucess(mList.get(poist).getId(),poist);
+    }
+
+    private void requestOrderSucess(String orderId, final int poist){
+        Map<String,String> map = new HashMap<>();
+        map.put("id",orderId);
+        OkGoTools.getInstance().post("/merchant-api/order_alter.api.php",map,getContext(),new RequestCallBack(getContext()){
+            @Override
+            public void onSuccess(Response<RequestStringBean> response) {
+                super.onSuccess(response);
+                if(response.isSuccessful()) {
+                    if(response.body().isRes()){
+                        mList.remove(poist);
+                        mOrderAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Response<RequestStringBean> response) {
+                super.onError(response);
+            }
+        });
+
     }
 }

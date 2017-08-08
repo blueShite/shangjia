@@ -17,7 +17,6 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".Login.LoginActivity">
-
         </activity>
         <activity android:name=".Splash.SplashActivity">
             <intent-filter>
@@ -35,6 +34,8 @@
         <activity android:name=".Order.ScanBarCode.ScanBarCodeActivity">
         </activity>
         <activity android:name=".My.MySub.MySetActivity">
+        </activity>
+        <activity android:name=".Order.OrderDetail.ShowBarCode.ShowBarcodeActivity">
         </activity>
     </application>
 

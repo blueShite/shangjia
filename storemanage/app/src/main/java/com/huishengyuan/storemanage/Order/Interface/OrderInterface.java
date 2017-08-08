@@ -13,4 +13,5 @@ public interface OrderInterface {
     void requestSucess(List<OrderListBean> list);
     void requestError();
     void onClickOrderItem(int poist);
+    void onClickSucessBtn(int poist);
 }

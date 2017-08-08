@@ -53,11 +53,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.mTextOrderAddress.setText(bean.getAddress());
         holder.mTextOrderName.setText(bean.getAcc_name()+"的外卖订单");
         holder.mTextOrderFootName.setText(bean.getDish());
-        Picasso.with(mContext).load(AppUtils.setImageUrl(bean.getHeadimg())).fit().centerCrop().into(holder.mImageOrderHeader);
+        AppUtils.setImageUrl(bean.getHeadimg(),mContext,holder.mImageOrderHeader,R.drawable.tab_info_active);
         holder.selfView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mInterface.onClickOrderItem(position);
+            }
+        });
+        if(bean.getLOrderType().equals("-1")){
+            holder.mButtonOrderSucess.setVisibility(View.VISIBLE);
+        }else {
+            holder.mButtonOrderSucess.setVisibility(View.GONE);
+        }
+        holder.mButtonOrderSucess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mInterface.onClickSucessBtn(position);
             }
         });
     }

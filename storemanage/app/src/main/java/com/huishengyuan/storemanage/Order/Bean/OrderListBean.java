@@ -25,6 +25,15 @@ public class OrderListBean {
     private String dish;
     private String headimg;
     private String acc_name;
+    private String LOrderType;
+
+    public String getLOrderType() {
+        return LOrderType;
+    }
+
+    public void setLOrderType(String LOrderType) {
+        this.LOrderType = LOrderType;
+    }
 
     public String getDish() {
         return dish;

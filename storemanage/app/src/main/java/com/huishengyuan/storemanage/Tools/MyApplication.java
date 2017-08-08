@@ -31,7 +31,7 @@ public class MyApplication extends Application {
         //log打印级别，决定了log显示的详细程度
         loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
         //log颜色级别，决定了log在控制台显示的颜色
-        loggingInterceptor.setColorLevel(Level.INFO);
+        loggingInterceptor.setColorLevel(Level.WARNING);
         builder.addInterceptor(loggingInterceptor);
         //全局的读取超时时间
         builder.readTimeout(30000, TimeUnit.MILLISECONDS);

@@ -18,9 +18,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.v7.app.AlertDialog;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.huishengyuan.storemanage.NetWork.OkGoTools;
 import com.huishengyuan.storemanage.Tools.MyApplication;
+import com.squareup.picasso.Picasso;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -134,12 +136,22 @@ public class AppUtils {
         return width;
     }
 
-    public static String setImageUrl(String imageUrl){
+    public static void setImageUrl(String imageUrl, Context context, ImageView imageView,int defaultImage){
 
         if(StringUtils.isEmpty(imageUrl)){
-            return "null";
+            if(defaultImage==-1){
+                Picasso.with(context).load("null").fit().centerCrop().into(imageView);
+            }else {
+                Picasso.with(context).load("null").fit().centerCrop().placeholder(defaultImage).into(imageView);
+            }
+            return ;
         }
-        return OkGoTools.BaseUrl+imageUrl;
+        if(defaultImage==-1){
+            Picasso.with(context).load(OkGoTools.BaseUrl+imageUrl).fit().centerCrop().into(imageView);
+        }else {
+            Picasso.with(context).load(OkGoTools.BaseUrl+imageUrl).fit().centerCrop().placeholder(defaultImage).into(imageView);
+        }
+
     }
 
 }

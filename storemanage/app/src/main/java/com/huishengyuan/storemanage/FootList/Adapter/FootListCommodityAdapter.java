@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.huishengyuan.storemanage.FootList.Bean.FootListBean;
 import com.huishengyuan.storemanage.FootList.Interface.FootListInterface;
 import com.huishengyuan.storemanage.R;
+import com.huishengyuan.storemanage.Tools.utils.AppUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,10 +27,12 @@ public class FootListCommodityAdapter extends RecyclerView.Adapter<FootListCommo
 
     private Context mContext;
     private FootListInterface mDetailInterface;
+    private List<FootListBean> mList;
 
-    public FootListCommodityAdapter(Context context, FootListInterface detailInterface) {
+    public FootListCommodityAdapter(List<FootListBean> list,Context context, FootListInterface detailInterface) {
         mContext = context;
         mDetailInterface = detailInterface;
+        mList = list;
     }
 
     @Override
@@ -38,6 +44,16 @@ public class FootListCommodityAdapter extends RecyclerView.Adapter<FootListCommo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        FootListBean bean = mList.get(position);
+        holder.mTextFootlistName.setText(bean.getDish());
+        holder.mTextFootlistPrice.setText("¥"+bean.getPrice());
+        AppUtils.setImageUrl(bean.getLitpic(),mContext,holder.mImageFootlistCommodity,-1);
+        if(bean.getState().equals("1")){
+            holder.mTextFootlistSub.setText("正在销售");
+        }else {
+            holder.mTextFootlistSub.setText("未上架");
+        }
         holder.selfView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +64,7 @@ public class FootListCommodityAdapter extends RecyclerView.Adapter<FootListCommo
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

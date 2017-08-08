@@ -14,6 +14,7 @@ import com.huishengyuan.storemanage.Tools.ActivityCollector;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 
 public class MySetActivity extends BaseActivity {
 
@@ -36,6 +37,17 @@ public class MySetActivity extends BaseActivity {
             case R.id.layout_my_set_about:
                 break;
             case R.id.layout_my_set_cache:
+                AlertDialog.Builder cachebuilder = new AlertDialog.Builder(MySetActivity.this);
+                cachebuilder.setTitle("提示");
+                cachebuilder.setMessage("确定清除缓存吗?");
+                cachebuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface anInterface, int i) {
+                        Toasty.success(MySetActivity.this,"清除缓存成功").show();
+                    }
+                });
+                cachebuilder.setNegativeButton("取消",null);
+                cachebuilder.show();
                 break;
             case R.id.button_my_set_out:
                 AlertDialog.Builder builder = new AlertDialog.Builder(MySetActivity.this);

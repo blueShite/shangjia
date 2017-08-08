@@ -40,7 +40,11 @@ public class OrderPresenter extends BasePresenter {
                 dismissDialog();
                 if(response.isSuccessful()){
                     if(response.body().isRes()){
+                        Log.e("订单列表:",response.body().getData());
                         List<OrderListBean> list = JSON.parseArray(response.body().getData(),OrderListBean.class);
+                        for (OrderListBean bean:list){
+                            bean.setLOrderType(dispatching);
+                        }
                         mInterface.requestSucess(list);
                     }else {
                         mInterface.requestError();
