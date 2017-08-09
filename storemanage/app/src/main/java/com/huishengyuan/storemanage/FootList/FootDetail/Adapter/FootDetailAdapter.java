@@ -67,6 +67,11 @@ public class FootDetailAdapter extends RecyclerView.Adapter<FootDetailAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (position == 0) {
+            if(mDetailBean.getState().equals("1")){
+                holder.mButtonFootDetailAdd.setText("下架");
+            }else {
+                holder.mButtonFootDetailAdd.setText("上架");
+            }
             holder.mButtonFootDetailAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

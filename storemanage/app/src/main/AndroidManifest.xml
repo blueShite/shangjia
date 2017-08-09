@@ -37,6 +37,10 @@
         </activity>
         <activity android:name=".Order.OrderDetail.ShowBarCode.ShowBarcodeActivity">
         </activity>
+        <activity android:name=".My.MySub.MyAboutActivity">
+        </activity>
+        <activity android:name=".My.MySub.SetPasswordActivity">
+        </activity>
     </application>
 
 </manifest>

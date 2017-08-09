@@ -1,6 +1,8 @@
 package com.huishengyuan.storemanage.FootList.FootDetail;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,6 +37,7 @@ public class FootDetailActivity extends BaseActivity implements FootDetailInterf
 
     private FootDetailAdapter mDetailAdapter;
     private String footId;
+    private FootDetailBean mDetailBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,23 +64,39 @@ public class FootDetailActivity extends BaseActivity implements FootDetailInterf
 
     @Override
     public void onClickAddFootBtn() {
-        new AddFootAlert(FootDetailActivity.this)
-                .builder()
-                .onClickSubmit(new AddFootAlert.OnClickAddFootInterface() {
-                    @Override
-                    public void addFoot(String numStr) {
-                        if(StringUtils.isEmpty(numStr)){
-                            return;
-                        }
-                        requestAddFoot(footId,numStr,"1");
-                    }
-                })
-                .onClickCancel(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                    }
-                }).show();
+        if(mDetailBean.getState().equals("2")){
+            new AddFootAlert(FootDetailActivity.this)
+                    .builder()
+                    .onClickSubmit(new AddFootAlert.OnClickAddFootInterface() {
+                        @Override
+                        public void addFoot(String numStr) {
+                            if(StringUtils.isEmpty(numStr)){
+                                return;
+                            }
+                            requestAddFoot(footId,numStr,"1");
+                        }
+                    })
+                    .onClickCancel(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    }).show();
+        }else {
+            AlertDialog.Builder cachebuilder = new AlertDialog.Builder(FootDetailActivity.this);
+            cachebuilder.setTitle("提示");
+            cachebuilder.setMessage("确定下架此商品吗?");
+            cachebuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface anInterface, int i) {
+                    requestAddFoot(footId,"0","2");
+                }
+            });
+            cachebuilder.setNegativeButton("取消",null);
+            cachebuilder.show();
+        }
+
     }
 
     public void requestDetail(){
@@ -93,8 +112,8 @@ public class FootDetailActivity extends BaseActivity implements FootDetailInterf
                 if(response.isSuccessful()){
                     if(response.body().isRes()){
                         Log.e("餐单详情:",response.body().getData());
-                        FootDetailBean detailBean = JSON.parseArray(response.body().getData(),FootDetailBean.class).get(0);
-                        mDetailAdapter = new FootDetailAdapter(detailBean,FootDetailActivity.this,FootDetailActivity.this);
+                        mDetailBean = JSON.parseArray(response.body().getData(),FootDetailBean.class).get(0);
+                        mDetailAdapter = new FootDetailAdapter(mDetailBean,FootDetailActivity.this,FootDetailActivity.this);
                         mFootDetailRecycler.setAdapter(mDetailAdapter);
                     }
                 }
@@ -114,7 +133,9 @@ public class FootDetailActivity extends BaseActivity implements FootDetailInterf
         showDialog();
         Map<String,String> map = new HashMap<>();
         map.put("menu_id",menuId);
-        map.put("num",num);
+        if(state.equals("1")){
+            map.put("num",num);
+        }
         map.put("state",state);
         OkGoTools.getInstance().post("/merchant-api/updata_stste.api.php",map,this,new RequestCallBack(this){
             @Override
@@ -123,7 +144,14 @@ public class FootDetailActivity extends BaseActivity implements FootDetailInterf
                 dismissDialog();
                 if(response.isSuccessful()){
                     if(response.body().isRes()){
-                        Toasty.success(FootDetailActivity.this,"上架成功").show();
+                        if(mDetailBean.getState().equals("2")){
+                            Toasty.success(FootDetailActivity.this,"上架成功").show();
+                            mDetailBean.setState("1");
+                        }else {
+                            Toasty.success(FootDetailActivity.this,"下架成功").show();
+                            mDetailBean.setState("2");
+                        }
+                        mDetailAdapter.notifyDataSetChanged();
                     }
                 }
             }

@@ -11,7 +11,7 @@
     <FrameLayout
         android:id="@+id/contentView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1">
 
     </FrameLayout>
@@ -22,6 +22,7 @@
         android:background="@color/ColorLine"/>
 
     <com.roughike.bottombar.BottomBar
+        android:layout_gravity="bottom"
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="55dp"

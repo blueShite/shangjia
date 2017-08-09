@@ -52,7 +52,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         if (position == 0) {
             return 0;
         }
-        if (position == 4) {
+        if (position == mList.size()+1) {
             return 2;
         }
         return 1;
@@ -126,7 +126,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
             holder.mTextOrderDetailFootTotalPrice.setText(mDetailBean.getTotal()+"元");
             holder.mTextOrderDetailFootPackPrice.setText(mDetailBean.getPack()+"元");
             holder.mTextOrderDetailFootGivePrice.setText(mDetailBean.getDelivery()+"元");
-            holder.mTextOrderDetailFootSalePrice.setText(mDetailBean.getDiscount()+"元");
+            //holder.mTextOrderDetailFootSalePrice.setText(mDetailBean.getDiscount()+"元");
             holder.mTextOrderDetailFootUserName.setText(mDetailBean.getAddress().getName());
             holder.mTextOrderDetailFootUserPhone.setText(mDetailBean.getAddress().getPhone());
             holder.mTextOrderDetailFootUserAddress.setText(mDetailBean.getAddress().getDizhi());

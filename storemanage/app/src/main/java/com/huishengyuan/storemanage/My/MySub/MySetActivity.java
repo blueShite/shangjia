@@ -33,8 +33,12 @@ public class MySetActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.layout_my_set_password:
+                Intent passIntent = new Intent(MySetActivity.this,SetPasswordActivity.class);
+                startActivity(passIntent);
                 break;
             case R.id.layout_my_set_about:
+                Intent aboutIntent = new Intent(MySetActivity.this,MyAboutActivity.class);
+                startActivity(aboutIntent);
                 break;
             case R.id.layout_my_set_cache:
                 AlertDialog.Builder cachebuilder = new AlertDialog.Builder(MySetActivity.this);

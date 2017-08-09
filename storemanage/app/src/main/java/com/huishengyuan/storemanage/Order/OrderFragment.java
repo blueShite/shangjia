@@ -1,9 +1,11 @@
 package com.huishengyuan.storemanage.Order;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 
 import com.huishengyuan.storemanage.Manage.Bean.LoginBean;
 import com.huishengyuan.storemanage.Manage.LoginManage;
+import com.huishengyuan.storemanage.My.MySub.MySetActivity;
 import com.huishengyuan.storemanage.NetWork.OkGoTools;
 import com.huishengyuan.storemanage.NetWork.RequestCallBack;
 import com.huishengyuan.storemanage.NetWork.RequestStringBean;
@@ -184,8 +187,19 @@ public class OrderFragment extends SupportFragment implements OrderInterface {
     }
 
     @Override
-    public void onClickSucessBtn(int poist) {
-        requestOrderSucess(mList.get(poist).getId(),poist);
+    public void onClickSucessBtn(final int poist) {
+
+        AlertDialog.Builder cachebuilder = new AlertDialog.Builder(getContext());
+        cachebuilder.setTitle("提示");
+        cachebuilder.setMessage("确定此单制作完成吗?");
+        cachebuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface anInterface, int i) {
+                requestOrderSucess(mList.get(poist).getId(),poist);
+            }
+        });
+        cachebuilder.setNegativeButton("取消",null);
+        cachebuilder.show();
     }
 
     private void requestOrderSucess(String orderId, final int poist){
