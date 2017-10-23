@@ -14,32 +14,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Login.LoginActivity">
+        <activity android:name=".Login.LoginActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Splash.SplashActivity">
+        <activity android:name=".Splash.SplashActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Tab.TabActivity">
+        <activity android:name=".Tab.TabActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".FootList.FootDetail.FootDetailActivity">
+        <activity android:name=".FootList.FootDetail.FootDetailActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Order.OrderDetail.OrderDetailActivity">
+        <activity android:name=".Order.OrderDetail.OrderDetailActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Order.ScanBarCode.ScanBarCodeActivity">
+        <activity android:name=".Order.ScanBarCode.ScanBarCodeActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".My.MySub.MySetActivity">
+        <activity android:name=".My.MySub.MySetActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Order.OrderDetail.ShowBarCode.ShowBarcodeActivity">
+        <activity android:name=".Order.OrderDetail.ShowBarCode.ShowBarcodeActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".My.MySub.MyAboutActivity">
+        <activity android:name=".My.MySub.MyAboutActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".My.MySub.SetPasswordActivity">
+        <activity android:name=".My.MySub.SetPasswordActivity"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 

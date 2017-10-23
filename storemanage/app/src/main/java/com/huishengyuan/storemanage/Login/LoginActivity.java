@@ -70,7 +70,6 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onError(Response<RequestStringBean> response) {
                 super.onError(response);
-                Log.e("登录失败错误:",response.message());
                 dismissDialog();
             }
         });

@@ -21,7 +21,7 @@ public class OkGoTools {
     }
     //    private static final String BaseUrl = "http://116.255.228.199:8010";
 //    public static final String BaseUrl = "http://www.hsydining-hall.com";
-    public static final String BaseUrl = "http://www.hsydining-hall.com";
+    public static final String BaseUrl = "http://hsytest.hsydining-hall.com";
 
     public void get(String path, Map<String,String> map, Context context, RequestCallBack callback){
         OkGo.<RequestStringBean>get(BaseUrl+path)
